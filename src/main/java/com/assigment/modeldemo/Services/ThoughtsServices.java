@@ -33,6 +33,9 @@ public class ThoughtsServices {
     }
 
     public ResponseEntity<Object> createThoughts(Thoughts thoughts) {
+        if(thoughts == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please Send some thoughts with Request");
+        }
         thoughtsRepository.save(thoughts);
         return ResponseEntity.status(HttpStatus.OK).body("Your Thoughts are with us now");
     }
@@ -55,6 +58,9 @@ public class ThoughtsServices {
     }
 
     public ResponseEntity<Object> deleteThoughts(UUID id) {
+        if(id == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Thought Id not found !!");
+        }
         thoughtsRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.OK).body("It's always good to get rid of old Thoughts");
     }
